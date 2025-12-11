@@ -42,9 +42,9 @@ app.use(errorHandler);
 
 const PORT = config.port;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📊 Environment: ${config.nodeEnv}`);
-  console.log(`📝 API Documentation: http://localhost:${PORT}/`);
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Environment: ${config.nodeEnv}`);
+  console.log(`API Documentation: http://localhost:${PORT}/`);
 });
 
 export default app;

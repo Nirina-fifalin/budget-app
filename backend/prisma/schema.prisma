@@ -65,3 +65,13 @@ model Budget {
 
   @@index([userId])
 }
+
+model MonthSummary {
+  id         Int      @id @default(autoincrement())
+  month      String
+  year       Int
+  income     Int
+  expense    Int
+  balance    Int
+  carryOver  Int
+}

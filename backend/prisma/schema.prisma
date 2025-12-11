@@ -52,26 +52,26 @@ model Transaction {
 }
 
 model Budget {
-  id         String   @id @default(uuid())
-  name       String
-  amount     Float
-  period     String
-  startDate  DateTime
-  endDate    DateTime
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(uuid())
+  name      String
+  amount    Float
+  period    String
+  startDate DateTime
+  endDate   DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }
 
 model MonthSummary {
-  id         Int      @id @default(autoincrement())
-  month      String
-  year       Int
-  income     Int
-  expense    Int
-  balance    Int
-  carryOver  Int
+  id        Int    @id @default(autoincrement())
+  month     String
+  year      Int
+  income    Int
+  expense   Int
+  balance   Int
+  carryOver Int
 }

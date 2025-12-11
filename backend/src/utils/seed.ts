@@ -142,7 +142,6 @@ async function seed() {
       },
     });
 
-    // Dépenses
     await prisma.transaction.create({
       data: {
         amount: 450,
@@ -238,6 +237,35 @@ async function seed() {
     });
 
     console.log('✅ Budget créé');
+
+    console.log('📆 Calcul du résumé du mois...');
+
+    const incomeSum = await prisma.transaction.aggregate({
+    where: { type: 'income', userId: user.id },
+    _sum: { amount: true },
+    });
+
+    const expenseSum = await prisma.transaction.aggregate({
+    where: { type: 'expense', userId: user.id },
+    _sum: { amount: true },
+    });
+
+    const income = incomeSum._sum.amount ?? 0;
+    const expense = expenseSum._sum.amount ?? 0;
+    const balance = income - expense;
+
+    const monthSummary = await prisma.monthSummary.create({
+    data: {
+        month: 'December',
+        year: 2024,
+        income,
+        expense,
+        balance,
+        carryOver: balance,
+    },
+    });
+
+    console.log('✅ Résumé mensuel créé :', monthSummary);
 
     const totalTransactions = await prisma.transaction.count();
     const totalCategories = await prisma.category.count();
